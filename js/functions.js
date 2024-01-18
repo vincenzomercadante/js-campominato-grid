@@ -1,6 +1,7 @@
 /**
  *
  * @param {HTMLObjectElement} gridContainer main della pagina dove verrà inserita la griglia
+ *
  */
 function generateGrid(gridContainer) {
   const difficultSelection = document.getElementById("difficulty-selection");
@@ -19,7 +20,7 @@ function generateGrid(gridContainer) {
   }
 
   for (let i = 0; i < gridLevel * gridLevel; i++) {
-    boxContainer.append(generateBox(i, gridLevel));
+    boxContainer.append(generateBox(i + 1, gridLevel));
   }
 }
 
