@@ -3,14 +3,23 @@
  * @param {HTMLObjectElement} gridContainer main della pagina dove verrà inserita la griglia
  */
 function generateGrid(gridContainer) {
+  const difficultSelection = document.getElementById("difficulty-selection");
   gridContainer.innerHTML = "";
   const boxContainer = document.createElement("div");
   boxContainer.classList.add("box-container");
   gridContainer.append(boxContainer);
 
-  let containerElements;
-  for (let i = 0; i < 100; i++) {
-    boxContainer.append(generateBox(i));
+  let gridLevel;
+  if (difficultSelection.value.toLowerCase() === "hard") {
+    gridLevel = 7;
+  } else if (difficultSelection.value.toLowerCase() === "medium") {
+    gridLevel = 9;
+  } else {
+    gridLevel = 10;
+  }
+
+  for (let i = 0; i < gridLevel * gridLevel; i++) {
+    boxContainer.append(generateBox(i, gridLevel));
   }
 }
 
@@ -20,10 +29,11 @@ function generateGrid(gridContainer) {
  * @returns {object} boxEl box creato che andrà inserito all'interno del BoxContainer
  */
 
-function generateBox(boxText) {
+function generateBox(boxText, boxwidth) {
   const boxEl = document.createElement("div");
   boxEl.classList.add("box");
   boxEl.innerText = boxText;
+  boxEl.style.width = `calc(100% / ${boxwidth})`;
   boxEl.addEventListener("click", function () {
     isClicked(this);
   });

@@ -28,6 +28,10 @@ img {
   width: 100px;
 }
 
+#header select {
+  width: 150px;
+}
+
 /* ! main */
 #main {
   background-color: var(--main-bg);
@@ -46,7 +50,6 @@ img {
 }
 
 .box-container > .box {
-  width: calc(100% / 10);
   aspect-ratio: 1;
   border: 2px solid black;
   display: flex;

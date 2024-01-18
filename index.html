@@ -28,7 +28,13 @@
         <h1>Campo Minato</h1>
       </div>
       <!-- lato destro header -->
-      <div class="header-right">
+      <div class="d-flex align-items-center">
+        <label for="difficulty-selection" class="me-2 fs-5">Difficulty: </label>
+        <select name="difficulty" id="difficulty-selection" class="me-4">
+          <option value="EASY">EASY</option>
+          <option value="MEDIUM">MEDIUM</option>
+          <option value="HARD">HARD</option>
+        </select>
         <button class="btn btn-primary" id="play-button">PLAY</button>
       </div>
     </header>
