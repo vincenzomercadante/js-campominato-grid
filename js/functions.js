@@ -1,3 +1,7 @@
+const insertBombsIndex = [];
+let isGameOver = false;
+const gameGrid = document.querySelectorAll(".box");
+
 /**
  *
  * @param {HTMLObjectElement} gridContainer main della pagina dove verrà inserita la griglia
@@ -22,6 +26,8 @@ function generateGrid(gridContainer) {
   for (let i = 0; i < gridLevel * gridLevel; i++) {
     boxContainer.append(generateBox(i + 1, gridLevel));
   }
+
+  generateBomb(gameGrid, gridLevel);
 }
 
 /**
@@ -30,22 +36,46 @@ function generateGrid(gridContainer) {
  * @returns {object} boxEl box creato che andrà inserito all'interno del BoxContainer
  */
 
-function generateBox(boxText, boxwidth) {
+function generateBox(boxIndex, boxwidth) {
   const boxEl = document.createElement("div");
   boxEl.classList.add("box");
-  boxEl.innerText = boxText;
   boxEl.style.width = `calc(100% / ${boxwidth})`;
   boxEl.addEventListener("click", function () {
-    isClicked(this);
+    if (!isGameOver) {
+      if (insertBombsIndex.includes(boxIndex)) {
+        this.innerHTML = `<i class="fa-solid fa-bomb"></i>`;
+        this.classList.add("bomb", "clicked");
+        isGameOver = true;
+      } else {
+        this.classList.add("clicked");
+      }
+    }
   });
   return boxEl;
 }
 
 /**
  *
- * @param {object} boxEl box che viene cliccato
+ * @param {number} number Numero che indica il range su cui fare il random
+ * @returns {number} numb NUmero generato casualmente
  */
-function isClicked(boxEl) {
-  console.log(boxEl.innerText);
-  boxEl.classList.toggle("clicked");
+function randomNumber(number) {
+  const numb = Math.floor(Math.random() * number - 1 + 1);
+  return numb;
+}
+
+/**
+ *
+ * @param {HTMLCollection} gameGrid array di tutte le box
+ * @param {number} difficulty numero che indica la difficoltà per calcolare
+ */
+function generateBomb(gameGrid, difficulty) {
+  let numb;
+
+  while (insertBombsIndex.length < 16) {
+    numb = randomNumber(Math.pow(difficulty, 2));
+    if (!insertBombsIndex.includes(numb)) {
+      insertBombsIndex.push(numb);
+    }
+  }
 }

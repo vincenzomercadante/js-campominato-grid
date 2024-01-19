@@ -56,6 +56,11 @@ img {
   justify-content: center;
   align-items: center;
   font-weight: bold;
+  font-size: 3rem;
+}
+
+.box.bomb.clicked {
+  background-color: red;
 }
 
 .box.clicked {
