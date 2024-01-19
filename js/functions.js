@@ -1,6 +1,6 @@
-const insertBombsIndex = [];
-let isGameOver = false;
-const gameGrid = document.querySelectorAll(".box");
+let insertBombsIndex;
+let isGameOver;
+let winClick;
 
 /**
  *
@@ -10,6 +10,9 @@ const gameGrid = document.querySelectorAll(".box");
 function generateGrid(gridContainer) {
   const difficultSelection = document.getElementById("difficulty-selection");
   gridContainer.innerHTML = "";
+  insertBombsIndex = [];
+  isGameOver = false;
+  winClick = 0;
   const boxContainer = document.createElement("div");
   boxContainer.classList.add("box-container");
   gridContainer.append(boxContainer);
@@ -27,6 +30,7 @@ function generateGrid(gridContainer) {
     boxContainer.append(generateBox(i + 1, gridLevel));
   }
 
+  const gameGrid = document.querySelectorAll(".box");
   generateBomb(gameGrid, gridLevel);
 }
 
@@ -45,9 +49,13 @@ function generateBox(boxIndex, boxwidth) {
       if (insertBombsIndex.includes(boxIndex)) {
         this.innerHTML = `<i class="fa-solid fa-bomb"></i>`;
         this.classList.add("bomb", "clicked");
-        isGameOver = true;
       } else {
         this.classList.add("clicked");
+        winClick++;
+        if (winClick == Math.pow(boxwidth, 2) - 48) {
+          isGameOver = true;
+          alert("Hai vinto");
+        }
       }
     }
   });
@@ -72,10 +80,11 @@ function randomNumber(number) {
 function generateBomb(gameGrid, difficulty) {
   let numb;
 
-  while (insertBombsIndex.length < 16) {
+  while (insertBombsIndex.length < Math.pow(difficulty, 2)) {
     numb = randomNumber(Math.pow(difficulty, 2));
     if (!insertBombsIndex.includes(numb)) {
       insertBombsIndex.push(numb);
     }
   }
+  console.log(insertBombsIndex);
 }
