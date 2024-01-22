@@ -57,6 +57,7 @@ function generateBox(boxIndex, boxwidth) {
         // caso di sconfitta del gioco
         this.innerHTML = `<i class="fa-solid fa-bomb"></i>`;
         this.classList.add("bomb", "clicked");
+        allVisible();
         setTimeout(function () {
           alert("Hai perso");
         }, 400);
@@ -104,5 +105,18 @@ function generateBomb(difficulty) {
       insertBombsIndex.push(numb);
     }
   }
-  console.log(insertBombsIndex);
+}
+
+/**
+ * funzione che rende cliccate tutte le celle
+ */
+function allVisible() {
+  const boxes = document.getElementsByClassName("box");
+  for (let i = 0; i < boxes.length; i++) {
+    if (insertBombsIndex.includes(i)) {
+      boxes[i].innerHTML = `<i class="fa-solid fa-bomb"></i>`;
+      boxes[i].classList.add("bomb");
+    }
+    boxes[i].classList.add("clicked");
+  }
 }
