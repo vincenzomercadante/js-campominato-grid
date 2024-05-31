@@ -22,10 +22,9 @@
 */
 
 // RECUPERO GLI ELEMENTI HTML
-const mainContainer = document.getElementById("main");
 const playButton = document.getElementById("play-button");
 
 // genero la griglia dopo il click del mio pulsante
 playButton.addEventListener("click", function () {
-  generateGrid(mainContainer);
+  generateGrid();
 });
